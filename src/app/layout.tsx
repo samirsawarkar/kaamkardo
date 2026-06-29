@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ecosystemTools, siteConfig } from "@/lib/ecosystem";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-heading",
@@ -16,29 +17,40 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "KaamKarDo — Get Hired Faster. Look Professional. Start Earning.",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: "KaamKarDo - AI Tools for Careers, Content, Photos, and SEO",
+    template: "%s | KaamKarDo",
+  },
   description:
-    "We fix your resume, LinkedIn profile, and business setup — done for you in 24–48 hours. ATS-optimized resumes, studio headshots, and full business launch. No learning curve.",
+    "KaamKarDo is an AI tools ecosystem for Indian professionals, creators, founders, and job seekers: resumes, AI photos, skill roadmaps, LinkedIn content, and SEO writing.",
   keywords: [
+    "AI tools India",
+    "AI tools for professionals",
     "resume writing service india",
     "ATS resume",
+    "AI headshots India",
     "LinkedIn profile makeover",
-    "business setup india",
-    "professional resume",
-    "get hired faster",
+    "SEO article writer",
+    "career roadmap",
+    ...ecosystemTools.flatMap((tool) => tool.keywords),
+    ...ecosystemTools.flatMap((tool) => tool.longTailKeywords),
   ],
   authors: [{ name: "KaamKarDo" }],
   creator: "KaamKarDo",
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: "/kaamkardo.png",
     shortcut: "/kaamkardo.png",
     apple: "/kaamkardo.png",
   },
   openGraph: {
-    title: "KaamKarDo — Get Hired Faster. Look Professional.",
+    title: "KaamKarDo - AI Tools for Careers, Content, Photos, and SEO",
     description:
-      "Done-for-you resume, profile, and business setup. Delivered in 24–48 hours.",
-    url: "https://kaamkardo.com",
+      "Explore KaamKarDo's focused AI ecosystem for resumes, professional photos, skill roadmaps, LinkedIn content, and SEO writing.",
+    url: "/",
     siteName: "KaamKarDo",
     locale: "en_IN",
     type: "website",
@@ -53,9 +65,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "KaamKarDo — Get Hired Faster",
+    title: "KaamKarDo - AI Tools for Professionals",
     description:
-      "We fix your resume, LinkedIn, and business setup — in 24–48 hours.",
+      "Resume, photo, skill, LinkedIn, and SEO AI tools under one KaamKarDo ecosystem.",
     images: ["/kaamkardo.png"],
   },
   robots: {

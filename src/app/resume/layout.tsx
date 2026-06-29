@@ -3,6 +3,13 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Get More Interviews | Resume Rewrite by KaamKarDo",
   description: "We rewrite your resume to pass ATS and get recruiter attention. Delivered in 24 hours.",
+  alternates: {
+    canonical: "https://resume.kaamkardo.com",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function ResumeLayout({

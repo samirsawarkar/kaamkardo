@@ -1,11 +1,74 @@
 import OmniSyncHeader from "@/components/kaamkardo/header";
 import BgCanvasClient from "@/components/kaamkardo/bg-canvas-client";
 import EcosystemSlider from "@/components/kaamkardo/ecosystem-slider";
+import EcosystemSeoSections from "@/components/kaamkardo/ecosystem-seo-sections";
+import BlogSection from "@/components/kaamkardo/blog-section";
+import { ecosystemTools, siteConfig } from "@/lib/ecosystem";
 import * as motion from "framer-motion/client";
 
 export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${siteConfig.url}/#organization`,
+        name: siteConfig.name,
+        url: siteConfig.url,
+        logo: `${siteConfig.url}/kaamkardo.png`,
+        description: siteConfig.description,
+        sameAs: siteConfig.sameAs,
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "KaamKarDo AI tools ecosystem",
+          itemListElement: ecosystemTools.slice(1).map((tool, index) => ({
+            "@type": "Offer",
+            position: index + 1,
+            name: tool.seoTitle,
+            description: tool.desc,
+            url: tool.url,
+            category: tool.keywords[0],
+          })),
+        },
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${siteConfig.url}/#website`,
+        name: siteConfig.name,
+        url: siteConfig.url,
+        description: siteConfig.description,
+        publisher: {
+          "@id": `${siteConfig.url}/#organization`,
+        },
+        about: ecosystemTools.flatMap((tool) => [
+          tool.seoTitle,
+          ...tool.keywords,
+          ...tool.longTailKeywords,
+        ]),
+      },
+      {
+        "@type": "ItemList",
+        "@id": `${siteConfig.url}/#tools`,
+        name: "KaamKarDo AI tools",
+        itemListElement: ecosystemTools.map((tool, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: tool.seoTitle,
+          url: tool.url,
+          description: tool.desc,
+        })),
+      },
+    ],
+  };
+
   return (
-    <div className="min-h-screen flex flex-col text-foreground selection:bg-foreground selection:text-background relative overflow-hidden">
+    <div className="min-h-screen flex flex-col text-foreground selection:bg-foreground selection:text-background relative overflow-x-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
 
       {/* Background: floating AI/Math formula canvas */}
       <BgCanvasClient />
@@ -13,7 +76,7 @@ export default function Home() {
 
       <main
         id="main-content"
-        className="flex-1 flex flex-col items-center justify-center w-full max-w-7xl mx-auto px-4 pt-24 pb-8 relative z-10"
+        className="min-h-screen flex flex-col items-center justify-center w-full max-w-7xl mx-auto px-4 pt-24 pb-44 relative z-10"
       >
         {/* Social proof bar — moved to top */}
         <motion.div
@@ -44,6 +107,8 @@ export default function Home() {
 
         <EcosystemSlider />
       </main>
+      <EcosystemSeoSections />
+      <BlogSection />
     </div>
   );
 }

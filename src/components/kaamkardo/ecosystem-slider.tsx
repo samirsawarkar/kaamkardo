@@ -1,94 +1,39 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useCallback } from "react";
-import { Globe, FileText, Camera, Compass, Users, PenTool, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect, useCallback, useSyncExternalStore } from "react";
+import { Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
-const ecosystemTools = [
-  {
-    id: "directory",
-    title: "The #1 AI platform for professionals",
-    desc: "Streamline your career with our intuitive, scalable ecosystem of micro-SaaS tools.",
-    icon: Globe,
-    url: "https://kaamkardo.com",
-    cta: "Explore Directory",
-    accent: "from-sky-400 to-blue-600",
-    glow: "rgba(56,189,248,0.6)",
-  },
-  {
-    id: "resume",
-    title: "Free ATS Resume Score",
-    desc: "Upload your resume and get an instant ATS score (0–100), find out exactly why HR is rejecting you.",
-    icon: FileText,
-    logoImg: "/resume-logo.png",
-    url: "https://resume.kaamkardo.com",
-    cta: "Optimize Resume",
-    accent: "from-emerald-400 to-teal-600",
-    glow: "rgba(52,211,153,0.6)",
-  },
-  {
-    id: "photo",
-    title: "India's AI Style Marketplace",
-    desc: "Browse creator-made AI prompts, upload your photo, and generate Indian-context images for headshots, weddings, and reels.",
-    icon: Camera,
-    logoImg: "/photoready-logo.png",
-    url: "https://photoready.kaamkardo.com",
-    cta: "Generate Headshot",
-    accent: "from-violet-400 to-purple-600",
-    glow: "rgba(167,139,250,0.6)",
-  },
-  {
-    id: "skill",
-    title: "Learn the right skills",
-    desc: "Personalized skill roadmaps to accelerate your career growth.",
-    icon: Compass,
-    url: "https://skillhub.kaamkardo.com",
-    cta: "View Roadmap",
-    accent: "from-amber-400 to-orange-600",
-    glow: "rgba(251,191,36,0.6)",
-  },
-  {
-    id: "linkedin",
-    title: "Grow your audience",
-    desc: "Generate viral LinkedIn posts that build your personal brand.",
-    icon: Users,
-    url: "https://social.kaamkardo.com",
-    cta: "Create Post",
-    accent: "from-rose-400 to-pink-600",
-    glow: "rgba(251,113,133,0.6)",
-  },
-  {
-    id: "seo",
-    title: "Rank higher on Google",
-    desc: "Write SEO optimized articles that drive organic traffic.",
-    icon: PenTool,
-    url: "https://seo.kaamkardo.com",
-    cta: "Start Writing",
-    accent: "from-cyan-400 to-indigo-600",
-    glow: "rgba(34,211,238,0.6)",
-  },
-];
+import { ecosystemTools } from "@/lib/ecosystem";
 
 const DURATION = 5000;
+const MOBILE_QUERY = "(max-width: 639px)";
+
+function subscribeToMobileQuery(callback: () => void) {
+  const mediaQuery = window.matchMedia(MOBILE_QUERY);
+  mediaQuery.addEventListener("change", callback);
+  return () => mediaQuery.removeEventListener("change", callback);
+}
+
+function getIsMobileSnapshot() {
+  return window.matchMedia(MOBILE_QUERY).matches;
+}
 
 export default function EcosystemSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useSyncExternalStore(
+    subscribeToMobileQuery,
+    getIsMobileSnapshot,
+    () => false
+  );
   const [isPaused, setIsPaused] = useState(false);
   
-  const activeWrappedIndex = ((currentIndex % 6) + 6) % 6;
+  const activeWrappedIndex = ((currentIndex % ecosystemTools.length) + ecosystemTools.length) % ecosystemTools.length;
   const activeTool = ecosystemTools[activeWrappedIndex];
-
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 640);
-    const handleResize = () => setIsMobile(window.innerWidth < 640);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   useEffect(() => {
     if (isPaused) return;
@@ -118,7 +63,7 @@ export default function EcosystemSlider() {
     <>
       {/* ── Hero Text (scrollable content area) ──────────────── */}
       <div 
-        className="w-full flex flex-col items-center justify-center relative z-10 pb-36 overflow-hidden"
+        className="w-full flex flex-col items-center justify-center relative z-10 pb-40 overflow-visible"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
@@ -126,10 +71,10 @@ export default function EcosystemSlider() {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTool.id}
-              initial={{ opacity: 0, y: 28, filter: "blur(12px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -28, filter: "blur(12px)" }}
-              transition={{ duration: 0.5, ease: [0.25, 1, 0.35, 1] }}
+              initial={{ opacity: 0.92, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.25, ease: [0.25, 1, 0.35, 1] }}
               className="flex flex-col items-center w-full"
             >
               {/* Eyebrow badge */}
@@ -154,7 +99,13 @@ export default function EcosystemSlider() {
                 transition={{ type: "spring", stiffness: 260, damping: 18 }}
               >
                 {activeTool.logoImg ? (
-                  <img src={activeTool.logoImg} alt={activeTool.title} className="w-full h-full object-cover" />
+                  <Image
+                    src={activeTool.logoImg}
+                    alt={activeTool.title}
+                    fill
+                    sizes="64px"
+                    className="object-cover"
+                  />
                 ) : (
                   <activeTool.icon className="w-7 h-7 sm:w-8 sm:h-8 text-white drop-shadow-lg" />
                 )}
@@ -185,7 +136,7 @@ export default function EcosystemSlider() {
 
       {/* ── Fixed Bottom Dock ─────────────────────────────────── */}
       <div 
-        className="fixed bottom-0 left-0 right-0 z-50 flex flex-col items-center"
+        className="fixed bottom-0 left-0 right-0 z-[80] flex flex-col items-center"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
@@ -201,10 +152,10 @@ export default function EcosystemSlider() {
               {/* Arrows */}
               <button
                 onClick={() => goTo(-1)}
-                className="absolute left-0 sm:left-4 w-8 h-8 rounded-full bg-foreground/5 border border-foreground/10 backdrop-blur-lg flex items-center justify-center text-foreground/40 hover:text-foreground hover:bg-foreground/10 transition-all duration-300 hover:scale-110 active:scale-95 z-30"
+                className="absolute left-0 sm:left-4 w-11 h-11 rounded-full bg-foreground/5 border border-foreground/10 backdrop-blur-lg flex items-center justify-center text-foreground/40 hover:text-foreground hover:bg-foreground/10 transition-all duration-300 hover:scale-105 active:scale-95 z-30"
                 aria-label="Previous tool"
               >
-                <ChevronLeft className="w-3.5 h-3.5" />
+                <ChevronLeft className="w-4 h-4" />
               </button>
 
               {/* 3D Icons Track */}
@@ -218,8 +169,8 @@ export default function EcosystemSlider() {
                 >
                   {ecosystemTools.map((tool, index) => {
                     let diff = index - activeWrappedIndex;
-                    if (diff > 3) diff -= 6;
-                    if (diff < -2) diff += 6;
+                    if (diff > 3) diff -= ecosystemTools.length;
+                    if (diff < -2) diff += ecosystemTools.length;
                     
                     const isActive = diff === 0;
                     const isWrapping = Math.abs(diff) >= 3;
@@ -237,7 +188,6 @@ export default function EcosystemSlider() {
                           x: diff * iconSpacing,
                           scale: isActive ? 1.2 : Math.max(0.8, 0.95 - absDiff * 0.05),
                           opacity: isWrapping ? 0 : (isActive ? 1 : Math.max(0.6, 0.9 - absDiff * 0.1)),
-                          filter: isActive ? "blur(0px)" : `blur(${absDiff * 1}px)`,
                           y: isActive ? -16 : 0,
                           rotateY: rotateY,
                           zIndex: isActive ? 30 : 20 - absDiff,
@@ -262,8 +212,14 @@ export default function EcosystemSlider() {
                         aria-label={`Select ${tool.title}`}
                       >
                         {tool.logoImg ? (
-                          <div className={cn("w-full h-full rounded-full overflow-hidden transition-all duration-500", isActive ? "opacity-100" : "opacity-80 group-hover:opacity-100")}>
-                            <img src={tool.logoImg} alt={tool.title} className="w-full h-full object-cover" />
+                          <div className={cn("relative w-full h-full rounded-full overflow-hidden transition-all duration-500", isActive ? "opacity-100" : "opacity-80 group-hover:opacity-100")}>
+                            <Image
+                              src={tool.logoImg}
+                              alt={tool.title}
+                              fill
+                              sizes="44px"
+                              className="object-cover"
+                            />
                           </div>
                         ) : (
                           <tool.icon 
@@ -285,10 +241,10 @@ export default function EcosystemSlider() {
 
               <button
                 onClick={() => goTo(1)}
-                className="absolute right-0 sm:right-4 w-8 h-8 rounded-full bg-foreground/5 border border-foreground/10 backdrop-blur-lg flex items-center justify-center text-foreground/40 hover:text-foreground hover:bg-foreground/10 transition-all duration-300 hover:scale-110 active:scale-95 z-30"
+                className="absolute right-0 sm:right-4 w-11 h-11 rounded-full bg-foreground/5 border border-foreground/10 backdrop-blur-lg flex items-center justify-center text-foreground/40 hover:text-foreground hover:bg-foreground/10 transition-all duration-300 hover:scale-105 active:scale-95 z-30"
                 aria-label="Next tool"
               >
-                <ChevronRight className="w-3.5 h-3.5" />
+                <ChevronRight className="w-4 h-4" />
               </button>
             </div>
 
@@ -308,7 +264,6 @@ export default function EcosystemSlider() {
                     key={tool.id}
                     onClick={() => goTo(diff)}
                     animate={{
-                      width: isActive ? 36 : 8,
                       rotateY: dotRotateY,
                       opacity: isActive ? 1 : Math.max(0.3, 0.7 - absDiff * 0.12),
                     }}
@@ -318,23 +273,27 @@ export default function EcosystemSlider() {
                       damping: 22,
                       mass: 1,
                     }}
-                    className="relative h-1 rounded-full overflow-hidden cursor-pointer group"
+                    className="relative flex h-8 w-8 cursor-pointer items-center justify-center rounded-full group"
                     style={{ 
                       transformStyle: "preserve-3d", 
                       transform: `translateZ(${dotZ}px)`,
                     }}
                     aria-label={`Go to ${tool.title}`}
                   >
-                    <div className={cn(
-                      "absolute inset-0 rounded-full transition-colors duration-500",
-                      isActive ? "bg-foreground/20" : "bg-foreground/10 group-hover:bg-foreground/25"
-                    )} />
-                    {isActive && (
-                      <motion.div 
-                        className={cn("absolute left-0 top-0 h-full rounded-full bg-gradient-to-r", tool.accent)}
-                        style={{ width: `${progress * 100}%` }}
-                      />
-                    )}
+                    <motion.span
+                      animate={{ width: isActive ? 36 : 8 }}
+                      className={cn(
+                        "relative block h-1 overflow-hidden rounded-full transition-colors duration-500",
+                        isActive ? "bg-foreground/20" : "bg-foreground/10 group-hover:bg-foreground/25"
+                      )}
+                    >
+                      {isActive && (
+                        <motion.span
+                          className={cn("absolute left-0 top-0 h-full rounded-full bg-gradient-to-r", tool.accent)}
+                          style={{ width: `${progress * 100}%` }}
+                        />
+                      )}
+                    </motion.span>
                   </motion.button>
                 );
               })}

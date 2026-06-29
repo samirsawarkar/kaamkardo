@@ -2,20 +2,34 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
+
+function subscribeToMountedState() {
+  return () => {};
+}
+
+function getMountedSnapshot() {
+  return true;
+}
+
+function getServerMountedSnapshot() {
+  return false;
+}
 
 export default function OmniSyncHeader() {
   const { scrollY } = useScroll();
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(
+    subscribeToMountedState,
+    getMountedSnapshot,
+    getServerMountedSnapshot
+  );
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const unsub = scrollY.on("change", (v) => setScrolled(v > 20));
     return unsub;
   }, [scrollY]);
@@ -49,11 +63,11 @@ export default function OmniSyncHeader() {
         <Link href="/" className="flex items-center gap-3 group" aria-label="KaamKarDo home">
           <div className="w-9 h-9 rounded-xl bg-foreground flex items-center justify-center shadow-sm transition-all duration-200 group-hover:scale-105 group-hover:shadow-md overflow-hidden relative">
             <Image
-              src="/kaamkardo.png"
+              src="/kaamkardo-256.webp"
               alt="KaamKarDo Logo"
               fill
+              sizes="36px"
               className="object-cover"
-              priority
             />
           </div>
           <span className="font-heading font-bold text-lg tracking-tight text-foreground">
@@ -63,6 +77,12 @@ export default function OmniSyncHeader() {
 
         {/* Actions */}
         <div className="flex items-center gap-3">
+          <Link
+            href="/blog"
+            className="hidden text-sm font-semibold text-foreground/60 transition hover:text-foreground sm:inline-flex"
+          >
+            Blog
+          </Link>
           {/* Theme toggle */}
           {mounted && (
             <button
