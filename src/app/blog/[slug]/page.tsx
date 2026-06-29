@@ -71,8 +71,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  const jsonLd = {
-    "@context": "https://schema.org",
+  const blogPostingJsonLd = {
     "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
@@ -109,6 +108,28 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     ]
       .filter(Boolean)
       .map((src) => `${siteConfig.url}${src}`),
+  };
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      blogPostingJsonLd,
+      ...(post.faqs
+        ? [
+            {
+              "@type": "FAQPage",
+              mainEntity: post.faqs.map((faq) => ({
+                "@type": "Question",
+                name: faq.question,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: faq.answer,
+                },
+              })),
+            },
+          ]
+        : []),
+    ],
   };
 
   return (
@@ -235,6 +256,54 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <ArrowUpRight className="h-4 w-4" />
           </Link>
         </div>
+
+        {post.relatedLinks && (
+          <section className="mt-12 border-t border-foreground/10 pt-8">
+            <h2 className="text-xl font-extrabold text-foreground">
+              Related reading
+            </h2>
+            <div className="mt-5 grid gap-4 sm:grid-cols-3">
+              {post.relatedLinks.map((relatedLink) => (
+                <Link
+                  key={relatedLink.href}
+                  href={relatedLink.href}
+                  className="rounded-lg border border-foreground/10 bg-background p-4 transition hover:border-foreground/25 hover:bg-foreground/[0.03]"
+                >
+                  <span className="inline-flex items-center gap-2 text-sm font-extrabold text-foreground">
+                    {relatedLink.label}
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </span>
+                  <span className="mt-2 block text-sm leading-6 text-foreground/60">
+                    {relatedLink.description}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {post.faqs && (
+          <section className="mt-12 border-t border-foreground/10 pt-8">
+            <h2 className="text-xl font-extrabold text-foreground">
+              AI image marketplace FAQ
+            </h2>
+            <div className="mt-5 grid gap-4">
+              {post.faqs.map((faq) => (
+                <div
+                  key={faq.question}
+                  className="rounded-lg border border-foreground/10 bg-foreground/[0.025] p-5"
+                >
+                  <h3 className="text-base font-extrabold text-foreground">
+                    {faq.question}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-foreground/62">
+                    {faq.answer}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {post.references && (
           <section className="mt-12 border-t border-foreground/10 pt-8">
