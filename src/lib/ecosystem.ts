@@ -26,7 +26,7 @@ export type EcosystemTool = {
 
 export const siteConfig = {
   name: "KaamKarDo",
-  url: "https://kaamkardo.com",
+  url: "https://www.kaamkardo.com",
   description:
     "KaamKarDo is an AI tools ecosystem for Indian professionals, founders, creators, and job seekers who want career, content, image, and SEO work done faster.",
   sameAs: [
