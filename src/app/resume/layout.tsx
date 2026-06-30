@@ -20,12 +20,12 @@ export default function ResumeLayout({
   return (
     // We isolate this layout so it does not render the global header/footer nav
     // The root layout's GlobalCTAs will naturally hide on this route due to our pathname check
-    <div className="min-h-screen bg-background flex flex-col items-center selection:bg-foreground selection:text-background">
+    <div className="min-h-screen bg-white flex flex-col items-center selection:bg-[#0866ff] selection:text-white">
       <main className="w-full flex-1">
         {children}
       </main>
       
-      <footer className="w-full py-8 border-t border-border mt-20 text-center text-sm text-foreground/40">
+      <footer className="w-full py-8 border-t border-black/[0.07] mt-20 text-center text-sm text-[#6a7884]">
         © 2026 KaamKarDo. All rights reserved.
       </footer>
     </div>

@@ -73,8 +73,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const blogPostingJsonLd = {
     "@type": "BlogPosting",
+    "@id": `${getBlogPostUrl(post.slug)}#article`,
     headline: post.title,
     description: post.description,
+    inLanguage: "en-IN",
     datePublished: post.publishedAt,
     dateModified: post.publishedAt,
     mainEntityOfPage: getBlogPostUrl(post.slug),
@@ -92,6 +94,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       },
     },
     about: post.keywords,
+    keywords: post.keywords.join(", "),
+    articleSection: post.category,
     isPartOf: {
       "@type": "Blog",
       name: "KaamKarDo Blog",
@@ -114,6 +118,30 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     "@context": "https://schema.org",
     "@graph": [
       blogPostingJsonLd,
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${getBlogPostUrl(post.slug)}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteConfig.url,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Blog",
+            item: `${siteConfig.url}/blog`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: post.title,
+            item: getBlogPostUrl(post.slug),
+          },
+        ],
+      },
       ...(post.faqs
         ? [
             {
@@ -133,7 +161,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   };
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="min-h-screen bg-white text-[#0f191f]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -144,13 +172,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <nav className="mb-12 flex items-center justify-between gap-4">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-sm font-bold text-foreground/65 transition hover:text-foreground"
+            className="inline-flex items-center gap-2 text-sm font-bold text-[#52616d] transition hover:text-[#0866ff]"
           >
             <ArrowLeft className="h-4 w-4" />
             Blog
           </Link>
           <Link href="/" className="flex items-center gap-3" aria-label="KaamKarDo home">
-            <span className="relative h-8 w-8 overflow-hidden rounded-lg bg-foreground">
+            <span className="relative h-8 w-8 overflow-hidden rounded-lg bg-[#101820]">
               <Image
                 src="/kaamkardo-256.webp"
                 alt="KaamKarDo Logo"
@@ -159,16 +187,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 className="object-cover"
               />
             </span>
-            <span className="font-heading text-base font-bold text-foreground">
+            <span className="font-heading text-base font-bold text-[#101820]">
               {siteConfig.name}
             </span>
           </Link>
         </nav>
 
         <header>
-          <div className="flex flex-wrap items-center gap-3 text-xs font-bold uppercase text-foreground/45">
+          <div className="flex flex-wrap items-center gap-3 text-xs font-bold uppercase text-[#7b8a97]">
             <span>{post.category}</span>
-            <span className="h-1 w-1 rounded-full bg-foreground/30" />
+            <span className="h-1 w-1 rounded-full bg-[#a8b3bd]" />
             <time dateTime={post.publishedAt}>
               {new Date(`${post.publishedAt}T00:00:00`).toLocaleDateString("en-IN", {
                 day: "numeric",
@@ -176,17 +204,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 year: "numeric",
               })}
             </time>
-            <span className="h-1 w-1 rounded-full bg-foreground/30" />
+            <span className="h-1 w-1 rounded-full bg-[#a8b3bd]" />
             <span>{post.readTime}</span>
           </div>
-          <h1 className="mt-6 text-4xl font-black leading-tight text-foreground md:text-6xl">
+          <h1 className="mt-6 text-4xl font-black leading-tight tracking-normal text-[#101820] md:text-6xl">
             {post.title}
           </h1>
-          <p className="mt-6 text-xl leading-8 text-foreground/62">
+          <p className="mt-6 text-xl font-medium leading-8 text-[#52616d]">
             {post.intro}
           </p>
           {post.heroImage && (
-            <figure className="mt-10 overflow-hidden rounded-lg border border-foreground/10 bg-foreground/[0.035]">
+            <figure className="mt-10 overflow-hidden rounded-lg border border-black/[0.06] bg-[#f7f8fa]">
               <div className="relative aspect-[16/9]">
                 <Image
                   src={post.heroImage.src}
@@ -197,7 +225,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   priority
                 />
               </div>
-              <figcaption className="border-t border-foreground/10 px-4 py-3 text-sm leading-6 text-foreground/55">
+              <figcaption className="border-t border-black/[0.06] px-4 py-3 text-sm leading-6 text-[#52616d]">
                 {post.heroImage.caption}
               </figcaption>
             </figure>
@@ -207,18 +235,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <div className="mt-12 space-y-10">
           {post.sections.map((section) => (
             <section key={section.heading}>
-              <h2 className="text-2xl font-extrabold text-foreground">
+              <h2 className="text-2xl font-extrabold text-[#101820]">
                 {section.heading}
               </h2>
               {(Array.isArray(section.body) ? section.body : [section.body]).map(
                 (paragraph) => (
-                  <p key={paragraph} className="mt-4 text-lg leading-8 text-foreground/65">
+                  <p key={paragraph} className="mt-4 text-lg leading-8 text-[#52616d]">
                     {paragraph}
                   </p>
                 )
               )}
               {section.image && (
-                <figure className="mt-8 overflow-hidden rounded-lg border border-foreground/10 bg-foreground/[0.035]">
+                <figure className="mt-8 overflow-hidden rounded-lg border border-black/[0.06] bg-[#f7f8fa]">
                   <div className="relative aspect-[16/9]">
                     <Image
                       src={section.image.src}
@@ -228,7 +256,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                       className="object-cover"
                     />
                   </div>
-                  <figcaption className="border-t border-foreground/10 px-4 py-3 text-sm leading-6 text-foreground/55">
+                  <figcaption className="border-t border-black/[0.06] px-4 py-3 text-sm leading-6 text-[#52616d]">
                     {section.image.caption}
                   </figcaption>
                 </figure>
@@ -237,20 +265,20 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           ))}
         </div>
 
-        <div className="mt-14 rounded-lg border border-foreground/10 bg-foreground/[0.04] p-6">
-          <p className="text-sm font-bold uppercase text-foreground/45">
+        <div className="mt-14 rounded-lg border border-black/[0.06] bg-[#f7f8fa] p-6">
+          <p className="text-sm font-bold uppercase text-[#0866ff]">
             Related KaamKarDo tool
           </p>
-          <h2 className="mt-3 text-2xl font-extrabold text-foreground">
+          <h2 className="mt-3 text-2xl font-extrabold text-[#101820]">
             {post.targetSiteName}
           </h2>
-          <p className="mt-3 text-base leading-7 text-foreground/60">
+          <p className="mt-3 text-base leading-7 text-[#52616d]">
             Continue from this guide into the specialist product built for this
             exact search intent.
           </p>
           <Link
             href={post.cta.href}
-            className="mt-6 inline-flex h-10 items-center gap-2 rounded-full bg-foreground px-5 text-sm font-bold text-background transition hover:opacity-90"
+            className="mt-6 inline-flex h-10 items-center gap-2 rounded-full bg-[#0866ff] px-5 text-sm font-bold text-white transition hover:bg-[#005be6]"
           >
             {post.cta.label}
             <ArrowUpRight className="h-4 w-4" />
@@ -258,8 +286,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
 
         {post.relatedLinks && (
-          <section className="mt-12 border-t border-foreground/10 pt-8">
-            <h2 className="text-xl font-extrabold text-foreground">
+          <section className="mt-12 border-t border-black/[0.07] pt-8">
+            <h2 className="text-xl font-extrabold text-[#101820]">
               Related reading
             </h2>
             <div className="mt-5 grid gap-4 sm:grid-cols-3">
@@ -267,13 +295,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <Link
                   key={relatedLink.href}
                   href={relatedLink.href}
-                  className="rounded-lg border border-foreground/10 bg-background p-4 transition hover:border-foreground/25 hover:bg-foreground/[0.03]"
+                  className="rounded-lg border border-black/[0.06] bg-[#f7f8fa] p-4 transition hover:border-[#0866ff]/30 hover:bg-white"
                 >
-                  <span className="inline-flex items-center gap-2 text-sm font-extrabold text-foreground">
+                  <span className="inline-flex items-center gap-2 text-sm font-extrabold text-[#101820]">
                     {relatedLink.label}
                     <ArrowUpRight className="h-3.5 w-3.5" />
                   </span>
-                  <span className="mt-2 block text-sm leading-6 text-foreground/60">
+                  <span className="mt-2 block text-sm leading-6 text-[#52616d]">
                     {relatedLink.description}
                   </span>
                 </Link>
@@ -283,20 +311,20 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         )}
 
         {post.faqs && (
-          <section className="mt-12 border-t border-foreground/10 pt-8">
-            <h2 className="text-xl font-extrabold text-foreground">
+          <section className="mt-12 border-t border-black/[0.07] pt-8">
+            <h2 className="text-xl font-extrabold text-[#101820]">
               AI image marketplace FAQ
             </h2>
             <div className="mt-5 grid gap-4">
               {post.faqs.map((faq) => (
                 <div
                   key={faq.question}
-                  className="rounded-lg border border-foreground/10 bg-foreground/[0.025] p-5"
+                  className="rounded-lg border border-black/[0.06] bg-[#f7f8fa] p-5"
                 >
-                  <h3 className="text-base font-extrabold text-foreground">
+                  <h3 className="text-base font-extrabold text-[#101820]">
                     {faq.question}
                   </h3>
-                  <p className="mt-2 text-sm leading-6 text-foreground/62">
+                  <p className="mt-2 text-sm leading-6 text-[#52616d]">
                     {faq.answer}
                   </p>
                 </div>
@@ -306,14 +334,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         )}
 
         {post.references && (
-          <section className="mt-12 border-t border-foreground/10 pt-8">
-            <h2 className="text-xl font-extrabold text-foreground">Sources</h2>
+          <section className="mt-12 border-t border-black/[0.07] pt-8">
+            <h2 className="text-xl font-extrabold text-[#101820]">Sources</h2>
             <ul className="mt-4 grid gap-3">
               {post.references.map((reference) => (
                 <li key={reference.href}>
                   <Link
                     href={reference.href}
-                    className="inline-flex items-center gap-2 text-sm font-semibold leading-6 text-foreground/65 transition hover:text-foreground"
+                    className="inline-flex items-center gap-2 text-sm font-semibold leading-6 text-[#52616d] transition hover:text-[#0866ff]"
                   >
                     {reference.label}
                     <ArrowUpRight className="h-3.5 w-3.5 shrink-0" />

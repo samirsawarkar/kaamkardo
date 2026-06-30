@@ -1,117 +1,73 @@
-"use client";
-
-import Link from "next/link";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useTheme } from "next-themes";
-import { Moon, Sun } from "lucide-react";
-import { useEffect, useState, useSyncExternalStore } from "react";
+import Link from "next/link";
+import { BriefcaseBusiness, Newspaper, Search, UserRound } from "lucide-react";
 
-function subscribeToMountedState() {
-  return () => {};
-}
-
-function getMountedSnapshot() {
-  return true;
-}
-
-function getServerMountedSnapshot() {
-  return false;
-}
+const navItems = [
+  { href: "#tools", label: "AI tools" },
+  { href: "#why", label: "Why KaamKarDo" },
+  { href: "/blog", label: "Blog" },
+];
 
 export default function OmniSyncHeader() {
-  const { scrollY } = useScroll();
-  const { theme, setTheme } = useTheme();
-  const mounted = useSyncExternalStore(
-    subscribeToMountedState,
-    getMountedSnapshot,
-    getServerMountedSnapshot
-  );
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const unsub = scrollY.on("change", (v) => setScrolled(v > 20));
-    return unsub;
-  }, [scrollY]);
-
-  const py = useTransform(scrollY, [0, 80], ["1.25rem", "0.75rem"]);
-
   return (
-    <motion.header
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ type: "spring", stiffness: 280, damping: 28, delay: 0.05 }}
-      aria-label="Site header"
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-      style={{
-        backdropFilter: scrolled ? "blur(48px) saturate(200%)" : "blur(24px) saturate(160%)",
-        WebkitBackdropFilter: scrolled ? "blur(48px) saturate(200%)" : "blur(24px) saturate(160%)",
-        background: scrolled
-          ? "var(--header-bg-scrolled)"
-          : "var(--header-bg)",
-        borderBottom: scrolled ? "1px solid rgba(128,128,128,0.12)" : "1px solid transparent",
-        boxShadow: scrolled
-          ? "0 4px 24px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.1)"
-          : "none",
-      }}
-    >
-      <motion.div
-        className="max-w-6xl mx-auto flex items-center justify-between px-6"
-        style={{ paddingTop: py, paddingBottom: py }}
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-black/[0.07] bg-white/92 backdrop-blur-2xl">
+      <nav
+        aria-label="Main navigation"
+        className="mx-auto flex h-16 w-full max-w-[1500px] items-center justify-between px-4 sm:px-6 lg:px-8"
       >
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group" aria-label="KaamKarDo home">
-          <div className="w-9 h-9 rounded-xl bg-foreground flex items-center justify-center shadow-sm transition-all duration-200 group-hover:scale-105 group-hover:shadow-md overflow-hidden relative">
+        <Link href="/" className="flex items-center gap-2.5" aria-label="KaamKarDo home">
+          <span className="relative flex h-8 w-8 overflow-hidden rounded-md">
             <Image
               src="/kaamkardo-256.webp"
-              alt="KaamKarDo Logo"
+              alt=""
               fill
-              sizes="36px"
+              sizes="32px"
+              priority
               className="object-cover"
             />
-          </div>
-          <span className="font-heading font-bold text-lg tracking-tight text-foreground">
+          </span>
+          <span className="text-[17px] font-extrabold tracking-[-0.01em] text-[#111820]">
             KaamKarDo
           </span>
         </Link>
 
-        {/* Actions */}
-        <div className="flex items-center gap-3">
+        <div className="hidden items-center gap-9 md:flex">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-sm font-semibold text-[#15202b] transition hover:text-[#0866ff]"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
+
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Link
+            href="#tools"
+            aria-label="Search KaamKarDo tools"
+            className="hidden h-10 w-10 items-center justify-center rounded-full text-[#15202b] transition hover:bg-[#f1f4f7] sm:flex"
+          >
+            <Search className="h-5 w-5" />
+          </Link>
           <Link
             href="/blog"
-            className="hidden text-sm font-semibold text-foreground/60 transition hover:text-foreground sm:inline-flex"
+            aria-label="Read KaamKarDo blog"
+            className="hidden h-10 w-10 items-center justify-center rounded-full text-[#15202b] transition hover:bg-[#f1f4f7] sm:flex"
           >
-            Blog
+            <Newspaper className="h-5 w-5" />
           </Link>
-          {/* Theme toggle */}
-          {mounted && (
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2.5 rounded-full border border-foreground/10 bg-foreground/5 hover:bg-foreground/10 text-foreground/60 hover:text-foreground transition-all duration-200"
-              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-            >
-              <motion.div
-                key={theme}
-                initial={{ rotate: -30, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                transition={{ duration: 0.2 }}
-              >
-                {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-              </motion.div>
-            </button>
-          )}
-
-          {/* CTA */}
-          <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
-            <Link 
-              href="#services"
-              className="inline-flex items-center justify-center whitespace-nowrap bg-foreground text-background hover:opacity-90 rounded-full px-5 py-2 text-sm font-semibold shadow-sm transition-all h-9"
-            >
-              Get Started →
-            </Link>
-          </motion.div>
+          <Link
+            href="#tools"
+            className="inline-flex h-10 items-center gap-2 rounded-full bg-[#0866ff] px-4 text-sm font-bold text-white shadow-[0_10px_24px_rgba(8,102,255,0.22)] transition hover:bg-[#005be6]"
+          >
+            <BriefcaseBusiness className="h-4 w-4" />
+            <span className="hidden sm:inline">Get started</span>
+            <UserRound className="h-4 w-4 sm:hidden" />
+          </Link>
         </div>
-      </motion.div>
-    </motion.header>
+      </nav>
+    </header>
   );
 }

@@ -61,6 +61,239 @@ const seoTool = getTool("seo");
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "ai-prompt-images-generator-prompts",
+    title: "AI Prompt Images: Best Free Generator Prompts for Realistic Photos",
+    description:
+      "Copy-paste ai prompt images for free AI image generators, realistic photos, ChatGPT, Gemini, aesthetic portraits, men, boys, girls, and Indian festival trends.",
+    publishedAt: "2026-06-30",
+    readTime: "10 min read",
+    category: "AI Photo Prompts",
+    heroImage: {
+      src: "/blog/ai-prompt-images/ai-prompt-images-generator-hero.webp",
+      alt: "AI prompt images generator workflow turning text prompts into realistic portraits, aesthetic photos, product images, and Indian festive AI images.",
+      caption:
+        "The best AI prompt images start with clear prompt text, then improve through style, lighting, framing, and purpose-specific refinements.",
+    },
+    targetSiteId: photoTool.id,
+    targetSiteName: photoTool.seoTitle,
+    targetSiteUrl: photoTool.url,
+    keywords: [
+      "ai prompt images",
+      "ai prompt images generator",
+      "ai prompt images free",
+      "best ai prompts for images",
+      "ai prompt images aesthetic",
+      "ai prompt images maker",
+      "best ai prompts for realistic photos",
+      "ai photo prompt copy paste",
+      "ai image generator prompt text",
+      "ai prompt images for men",
+      "ai prompt images for boys",
+      "ai prompt images for girls",
+      "ai prompt images created with chatgpt",
+      "ai prompt.images reddit",
+      "gemini ai prompt images",
+      "trending ai image prompt",
+      "chatgpt ai prompt images",
+      "generate ai prompt images",
+      "funny ai image prompt",
+      "new ai image prompt",
+      "ai generated prompt images",
+      "ai red saree trending prompt images",
+      "ai that can prompt images",
+      "ai gemini prompt images",
+      "ai gudi padwa prompt images",
+      "ai photo prompt images",
+      "mother and son ai prompt images",
+      "ai text prompt images",
+    ],
+    intro:
+      "AI prompt images are created from text instructions, but the best results do not come from random fancy words. They come from clear visual direction: who is in the photo, what they are doing, where they are, how the light behaves, what camera style you want, and what should be avoided.",
+    sections: [
+      {
+        heading: "What are AI prompt images?",
+        body: [
+          "AI prompt images are pictures generated from written instructions in tools such as ChatGPT image generation, Gemini, Meta AI, Midjourney, Leonardo, Ideogram, or other AI image generators. A prompt can be one simple sentence, but stronger prompts behave more like a mini creative brief.",
+          "For example, a weak prompt says: create a boy photo. A better prompt says: create a realistic portrait of a 21-year-old Indian college student standing near a campus gate, wearing a clean black shirt and denim jacket, soft morning light, natural smile, shallow depth of field, smartphone portrait look, realistic skin texture, no extra fingers, no distorted face.",
+          "The second prompt works better because it gives the AI a subject, place, outfit, mood, lighting, camera framing, and quality rules. That is the difference between just generating an image and directing one.",
+        ],
+      },
+      {
+        heading: "The simple formula for better AI image prompts",
+        body: [
+          "Use this structure when writing prompt text for any AI image generator: subject + identity details + action + location + outfit + lighting + camera/framing + mood + style + negative instructions.",
+          "You do not need to use every part every time. For a profile photo, focus on face, outfit, background, lens, lighting, and expression. For a festival image, focus on clothing, decoration, cultural details, colors, and atmosphere. For a product image, focus on material, surface, reflections, shadow, composition, and brand mood.",
+          "A strong copy-paste prompt can look like this: Create a realistic photo of [person/product/scene], [specific details], in [location/background], wearing/featuring [style details], with [lighting], captured as [camera angle/lens/framing], mood is [emotion], high detail, natural colors, realistic texture, avoid distorted hands, extra fingers, fake text, blurry face, and plastic skin.",
+        ],
+        image: {
+          src: "/blog/ai-prompt-images/ai-image-prompt-formula.webp",
+          alt: "AI image generator prompt text formula showing subject, action, place, outfit, light, camera, mood, and avoid instructions.",
+          caption:
+            "A repeatable prompt formula helps free AI image generators understand the image you want before they start guessing.",
+        },
+      },
+      {
+        heading: "Best AI prompts for realistic photos",
+        body: [
+          "Realistic AI photos need ordinary details more than dramatic adjectives. Mention the lens look, lighting, skin texture, natural pose, real-world background, and believable clothing. Avoid overusing words like ultra, insane, masterpiece, and 8K if the model starts making the image too glossy.",
+          "Prompt: Create a realistic LinkedIn headshot of an Indian professional in a navy blazer and white shirt, standing in a modern office corridor with soft window light, natural confident smile, 50mm portrait lens, shallow depth of field, realistic skin texture, clean background, professional color grading, no extra fingers, no warped eyes, no artificial plastic skin.",
+          "Prompt: Create a candid street-style portrait of a young man in a plain black t-shirt and beige overshirt, standing beside a cafe window in Mumbai during golden hour, soft shadows, natural hair, relaxed expression, documentary photography style, realistic colors, slight background blur, no heavy retouching.",
+          "Prompt: Create a realistic photo of a young woman sitting near a window with a laptop and notebook, warm morning light, minimal home-office background, soft cotton kurta, natural makeup, calm focused expression, shot on a 35mm lens, realistic skin detail, balanced exposure, no distorted hands or unreadable text.",
+        ],
+        image: {
+          src: "/blog/ai-prompt-images/best-ai-prompts-realistic-photos.webp",
+          alt: "Best AI prompts for realistic photos shown as professional headshots, college portraits, aesthetic cafe photos, and product images.",
+          caption:
+            "Realistic AI photo prompts work best when they describe believable lighting, camera framing, expression, and real-world context.",
+        },
+      },
+      {
+        heading: "AI prompt images for men and boys",
+        body: [
+          "For men and boys, the best prompts usually avoid over-styled poses. Use clean outfits, believable environments, natural expressions, and a specific use case: LinkedIn, Instagram profile, dating app, college memory, gym transformation, or creator thumbnail.",
+          "Prompt for men: Create a premium realistic portrait of a 28-year-old Indian man wearing a charcoal blazer over a black t-shirt, standing on a city rooftop at sunset, confident but natural expression, warm rim light, blurred skyline background, cinematic portrait photography, sharp facial detail, realistic skin texture, no extra limbs.",
+          "Prompt for boys: Create a realistic photo of an Indian college boy wearing a white shirt, relaxed-fit jeans, and sneakers, sitting on campus steps with friends blurred in the background, soft daylight, casual confident smile, smartphone portrait style, natural colors, clean composition, no fake text.",
+          "Prompt for gym style: Create a realistic fitness portrait of a young man in a dark athletic t-shirt, standing in a modern gym with soft overhead lighting, natural muscular definition, sweat detail, serious expression, shallow depth of field, editorial sports photography style, no exaggerated body proportions.",
+        ],
+      },
+      {
+        heading: "AI prompt images for girls",
+        body: [
+          "For girls, specify the exact aesthetic instead of asking for beautiful or stylish. Say whether you want traditional, minimal, cinematic, soft glam, college casual, festive, fashion editorial, or professional. The more concrete the visual direction, the better the result.",
+          "Prompt: Create a realistic portrait of an Indian girl wearing a pastel kurti and silver earrings, standing in a clean garden walkway during soft morning light, natural smile, loose hair, warm color grading, 50mm portrait lens, gentle background blur, realistic skin texture, no distorted hands, no fake jewelry shapes.",
+          "Prompt: Create an aesthetic Instagram-style photo of a young woman wearing a cream linen shirt and blue denim, sitting at a quiet cafe table with iced coffee, soft window light, candid expression, muted colors, minimal background, realistic lifestyle photography, no over-smoothed face.",
+          "Prompt: Create a professional profile photo of a young Indian woman in a dark blazer, simple makeup, neat hair, neutral studio background, softbox lighting, clear face, confident expression, realistic corporate headshot style, natural skin texture.",
+        ],
+      },
+      {
+        heading: "Aesthetic AI prompt images",
+        body: [
+          "Aesthetic prompts work best when you name the aesthetic and the ingredients that create it: color palette, texture, light, composition, background, and mood. Do not only write aesthetic photo; that gives the model too much freedom.",
+          "Prompt: Create an aesthetic portrait with soft beige, olive, and white tones, a person sitting beside a rain-covered window, warm table lamp, film photography texture, cozy quiet mood, natural pose, shallow depth of field, gentle grain, realistic face, no blurry eyes.",
+          "Prompt: Create a clean Pinterest-style product photo of a white ceramic coffee mug on a wooden desk with a notebook, morning sunlight, soft shadows, minimal composition, neutral colors, lifestyle photography, realistic texture, no text or logos.",
+          "Prompt: Create a cinematic night portrait of a person walking under streetlights after rain, reflections on the road, dark jacket, soft neon highlights, moody but realistic color grading, 35mm lens look, natural motion blur, no distorted face.",
+        ],
+      },
+      {
+        heading: "Indian festival and trending AI image prompts",
+        body: [
+          "Festival prompts need cultural specificity. Mention the festival, outfit, decorations, location, colors, and respectful mood. This works better than generic festive photo prompts because the model gets a clearer visual map.",
+          "Vishu prompt: Create a realistic Vishu festival portrait of a Malayali family near a traditional Vishu kani setup with brass lamp, flowers, fruits, mirror, and yellow konna flowers, wearing traditional Kerala outfits, warm lamp light, joyful respectful atmosphere, realistic photo style, no fake text.",
+          "Gudi Padwa prompt: Create a realistic Gudi Padwa celebration photo of a Maharashtrian family on a balcony decorated with rangoli and a raised gudi, women wearing traditional nauvari saree, men wearing kurta, bright morning sunlight, festive colors, natural smiles, documentary photography style.",
+          "Red saree prompt: Create a trending realistic portrait of an Indian woman wearing an elegant red saree with subtle gold jewelry, standing near a decorated doorway with warm fairy lights, soft cinematic lighting, graceful pose, realistic fabric texture, natural makeup, shallow background blur.",
+          "Mother and son prompt: Create a warm realistic photo of an Indian mother and young son sitting together during a festival morning, mother wearing a silk saree, child wearing kurta, soft indoor lamp light, flowers and rangoli in the background, emotional natural smile, candid family photography style.",
+        ],
+        image: {
+          src: "/blog/ai-prompt-images/indian-festival-ai-prompt-images.webp",
+          alt: "Indian festival AI prompt images featuring red saree trending prompt, Gudi Padwa, Vishu, and mother and son festive portraits.",
+          caption:
+            "Cultural context makes Indian festival prompts stronger: name the occasion, outfit, decor, light, and emotional moment.",
+        },
+      },
+      {
+        heading: "Funny AI image prompts",
+        body: [
+          "Funny AI prompts work when the joke is visual and simple. Give the model one clear impossible situation, then keep the rest realistic so the image does not become messy.",
+          "Prompt: Create a funny realistic photo of a serious office employee presenting a business chart to a room full of confused people while the chart only shows a giant upward arrow labeled Monday energy, clean corporate meeting room, documentary photo style, readable simple text only.",
+          "Prompt: Create a funny image of a person dressed like a luxury fashion model posing dramatically in a tiny grocery store aisle while holding a packet of instant noodles like a premium handbag, cinematic lighting, realistic photo style, amused background shoppers.",
+          "Prompt: Create a funny realistic photo of a student looking extremely confident before an exam while surrounded by open books, sticky notes, coffee cups, and one tiny handwritten note that says I know nothing, natural dorm-room lighting, expressive face.",
+        ],
+      },
+      {
+        heading: "How to make AI prompt images for free",
+        body: [
+          "You can make AI prompt images free by using a free tier of an AI image generator, but the real trick is to test prompts in small steps. Start with the subject and lighting, generate, then add outfit, background, framing, and negative instructions. Do not throw twenty requirements into the first version.",
+          "If you are using ChatGPT, Gemini, Meta AI, or another AI prompt images generator, ask for one image first, then refine with plain feedback: make the background cleaner, make the face more natural, change the outfit to a navy blazer, make it look like a real phone photo, remove fake text, or keep the same pose but change the lighting.",
+          "For repeated personal photos, a prompt-only workflow can still be slow because you have to keep rewriting and testing. A style marketplace such as PhotoReady is useful when you want to browse finished looks first, pick the style, upload your photo, and generate your version without becoming a prompt engineer.",
+        ],
+      },
+      {
+        heading: "ChatGPT, Gemini, and Reddit prompt inspiration",
+        body: [
+          "Searches like ai prompt images created with ChatGPT, Gemini AI prompt images, ai gemini prompt images, and ai prompt.images Reddit usually come from the same need: people want proven examples before they spend credits or time. Treat those examples as starting points, not final answers.",
+          "When you copy a prompt from Reddit or a public gallery, localize it before generating. Change the person, age range, outfit, city, lighting, background, platform use case, and negative instructions. That turns a generic viral prompt into a prompt that actually fits your photo, brand, or festival idea.",
+          "If a prompt works in one image generator but fails in another, simplify it. ChatGPT, Gemini, Meta AI, and specialist image tools may interpret style words differently. The portable part of the prompt is the concrete visual brief: subject, place, outfit, lighting, camera, mood, and avoid list.",
+        ],
+      },
+      {
+        heading: "Copy-paste prompt templates",
+        body: [
+          "AI photo prompt copy paste for a professional headshot: Create a realistic professional headshot of [person description], wearing [outfit], standing/sitting in [background], soft natural lighting, confident approachable expression, 50mm lens portrait, shallow depth of field, realistic skin texture, clean color grading, no extra fingers, no distorted facial features, no fake text.",
+          "AI image generator prompt text for Instagram: Create an aesthetic lifestyle photo of [person description] in [location], wearing [outfit], doing [action], [time of day] lighting, [color palette] tones, candid pose, realistic smartphone photography, soft background blur, natural expression, no plastic skin, no warped hands.",
+          "Prompt for product photos: Create a premium product photo of [product] placed on [surface], with [background], [lighting style], sharp detail, realistic material texture, clean shadows, advertising photography composition, centered framing, no fake brand text, no distorted label.",
+          "Prompt for creator thumbnails: Create a bold realistic YouTube thumbnail image of [creator/person] reacting to [topic/object], expressive face, clean bright background, strong contrast, room for headline text on one side, high clarity, modern creator style, no random text generated in the image.",
+        ],
+      },
+      {
+        heading: "Mistakes that make AI images look fake",
+        body: [
+          "The most common mistake is asking for too many styles at once: cinematic, anime, realistic, watercolor, luxury, vintage, 3D, and DSLR in the same prompt. Pick one visual direction and commit to it.",
+          "The second mistake is not giving negative instructions. If you are generating people, always mention no extra fingers, no distorted hands, no warped eyes, no plastic skin, no duplicate face, no fake text, and no unrealistic teeth. These instructions do not guarantee perfection, but they reduce common errors.",
+          "The third mistake is ignoring purpose. A LinkedIn photo, dating app photo, festival portrait, meme image, product ad, and thumbnail need different framing. Before writing the prompt, decide where the image will be used. Purpose makes the prompt sharper.",
+        ],
+      },
+      {
+        heading: "Best way to generate AI prompt images",
+        body: [
+          "If you enjoy experimenting, use prompt text directly in your favorite AI image generator and improve the prompt through revisions. This is best for one-off creative images, funny concepts, abstract art, or fast idea testing.",
+          "If you want your own face in a realistic style, use a workflow built for photo transformation. Upload good source photos, choose a finished style, and keep the prompt focused on outfit, background, lighting, and mood. This usually gives more useful personal images than starting from a blank prompt box.",
+          "For Indian users, local context matters. A good AI prompt images maker should understand LinkedIn headshots, kurta photos, red saree trends, mother-and-son portraits, Gudi Padwa, Vishu, wedding looks, and creator photos. That is exactly the kind of style library PhotoReady is built around.",
+        ],
+      },
+    ],
+    cta: {
+      label: "Generate AI prompt images",
+      href: photoTool.url,
+    },
+    relatedLinks: [
+      {
+        label: "AI image marketplace",
+        href: "/blog/ai-image-marketplace-prompt-marketplaces",
+        description:
+          "Understand why prompt marketplaces and curated style galleries matter as AI image generation becomes easier.",
+      },
+      {
+        label: "AI headshots India",
+        href: "/blog/ai-headshots-for-linkedin-india",
+        description:
+          "Learn how Indian professionals can use AI headshots for LinkedIn, resumes, portfolios, and creator profiles.",
+      },
+      {
+        label: "SEO product growth",
+        href: "/blog/seo-articles-that-support-product-growth",
+        description:
+          "See how search-led articles can support a focused ecosystem of AI products and subdomains.",
+      },
+    ],
+    faqs: [
+      {
+        question: "What are AI prompt images?",
+        answer:
+          "AI prompt images are images created from text instructions in an AI image generator. The prompt tells the model the subject, background, style, lighting, framing, mood, and details to avoid.",
+      },
+      {
+        question: "How do I write the best AI prompts for images?",
+        answer:
+          "Use a clear formula: subject, action, location, outfit or object details, lighting, camera framing, mood, style, and negative instructions such as no distorted hands or fake text.",
+      },
+      {
+        question: "Can I create AI prompt images free?",
+        answer:
+          "Yes. Many AI image generators offer free usage or limited free credits. For better results, test a short prompt first, then refine the image with specific feedback.",
+      },
+      {
+        question: "What is the best AI prompt for realistic photos?",
+        answer:
+          "The best realistic photo prompts mention natural lighting, real-world background, believable clothing, camera lens style, expression, skin texture, and negative instructions that reduce distorted faces or hands.",
+      },
+      {
+        question: "Can ChatGPT or Gemini create AI prompt images?",
+        answer:
+          "Yes, depending on the image generation features available in your account and region. You can use the same prompt structure in ChatGPT, Gemini, Meta AI, and other image tools, then refine the output through follow-up instructions.",
+      },
+    ],
+  },
+  {
     slug: "ai-image-marketplace-prompt-marketplaces",
     title: "AI Image Marketplace: Why Prompt Marketplaces Win",
     description:

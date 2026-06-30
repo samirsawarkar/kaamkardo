@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
 import { ecosystemTools, siteConfig } from "@/lib/ecosystem";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -19,11 +18,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "KaamKarDo - AI Tools for Careers, Content, Photos, and SEO",
+    default: "KaamKarDo - Fast AI Tools for Careers, Content, Photos, and SEO",
     template: "%s | KaamKarDo",
   },
   description:
-    "KaamKarDo is an AI tools ecosystem for Indian professionals, creators, founders, and job seekers: resumes, AI photos, skill roadmaps, LinkedIn content, and SEO writing.",
+    "KaamKarDo is a fast AI tools ecosystem for Indian professionals, creators, founders, and job seekers: resumes, AI photos, skill roadmaps, LinkedIn content, and SEO writing.",
   keywords: [
     "AI tools India",
     "AI tools for professionals",
@@ -47,7 +46,7 @@ export const metadata: Metadata = {
     apple: "/kaamkardo.png",
   },
   openGraph: {
-    title: "KaamKarDo - AI Tools for Careers, Content, Photos, and SEO",
+    title: "KaamKarDo - Fast AI Tools for Careers, Content, Photos, and SEO",
     description:
       "Explore KaamKarDo's focused AI ecosystem for resumes, professional photos, skill roadmaps, LinkedIn content, and SEO writing.",
     url: "/",
@@ -94,15 +93,8 @@ export default function RootLayout({
       className={`${inter.variable} ${plusJakartaSans.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col font-sans bg-background text-foreground transition-colors duration-300">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+      <body className="min-h-full flex flex-col font-sans bg-white text-[#0f191f] transition-colors duration-300">
+        {children}
       </body>
     </html>
   );

@@ -45,24 +45,20 @@
 }
 
 .dark {
-  /* Deep Dark Mode (Not Sci-Fi, just professional deep gray/black) */
-  --background: #0A0A0A;
-  --foreground: #FAFAFA;
-  --card: #141414;
-  --card-foreground: #FAFAFA;
-  --border: #262626;
-  --accent: #1F1F1F;
-  --accent-foreground: #FAFAFA;
-  /* Glass layer - more transparent */
-  --glass-bg: rgba(0, 0, 0, 0.28);
-  /* Header glass */
-  --header-bg: rgba(0, 0, 0, 0.35);
-  --header-bg-scrolled: rgba(0, 0, 0, 0.65);
-  /* Glow accents */
+  --background: #FFFFFF;
+  --foreground: #111111;
+  --card: #F9FAFB;
+  --card-foreground: #111111;
+  --border: #E5E7EB;
+  --accent: #F3F4F6;
+  --accent-foreground: #111111;
+  --glass-bg: rgba(255, 255, 255, 0.30);
+  --header-bg: rgba(255, 255, 255, 0.45);
+  --header-bg-scrolled: rgba(255, 255, 255, 0.72);
   --glow-blue: #38bdf8;
   --glow-purple: #a78bfa;
-  --shadow-glow: 0 0 20px rgba(56, 189, 248, 0.25);
-  --shadow-glow-hover: 0 0 40px rgba(56, 189, 248, 0.45);
+  --shadow-glow: 0 0 20px rgba(56, 189, 248, 0.15);
+  --shadow-glow-hover: 0 0 30px rgba(56, 189, 248, 0.3);
 }
 
 
